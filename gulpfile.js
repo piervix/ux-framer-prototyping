@@ -28,7 +28,7 @@ gulp.task('clean', function () {
 
 gulp.task('watch', function () {
   gulp.watch(['./src/*.coffee', './src/**/*.coffee'], ['webpack']);
-  gulp.watch('./src/*.sketch', ['sketch']);
+  // gulp.watch('./src/*.sketch', ['copy']);
 
   browserSync({
     server: {
@@ -42,18 +42,6 @@ gulp.task('watch', function () {
 
 });
 
-gulp.task('sketch', function () {
-  gulp.src('src/*.sketch')
-    .pipe(sketch({
-      export: 'slices',
-      format: 'png',
-      saveForWeb: true,
-      scales: 1.0,
-      trimmed: false,
-    }))
-    .pipe(gulp.dest('build/images'));
-});
-
 gulp.task('copy', function () {
   gulp.src('./node_modules/framerjs/build/*')
     .pipe(gulp.dest('build/framer'));
@@ -63,7 +51,9 @@ gulp.task('copy', function () {
     .pipe(gulp.dest('build/images'));
   gulp.src('src/*.css')
     .pipe(gulp.dest('build'));
+  gulp.src('src/**/imported/*')
+    .pipe(gulp.dest('build'));
 });
 
-gulp.task('build', ['copy', 'sketch', 'webpack']);
+gulp.task('build', ['copy', 'webpack']);
 gulp.task('default', ['build', 'watch']);

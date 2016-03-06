@@ -4,24 +4,7 @@ device.setupContext();
 device.deviceType = "iphone-6-silver-hand";
 device.contentScale = 1;
 
-WIDTH = Framer.Screen.width
-HEIGHT = Framer.Screen.height
+inbox = Framer.Importer.load("framer101_inbox.framer/imported/framer101_inbox")
 
-Framer.Defaults.Animation =
-  curve: 'spring(150, 10, 0)'
-
-circle = new Layer
-  x: WIDTH / 2
-  y: HEIGHT / 2
-  width: 277
-  height: 277
-  image: 'images/circle.png'
-
-circle.on Events.Click, ->
-  bounce = new Animation
-    layer: circle
-    properties:
-      x: WIDTH * Math.random()
-      y: HEIGHT * Math.random()
-
-  bounce.start()
+inbox.fab.on Events.Click, ->
+   print "clicked!"
