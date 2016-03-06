@@ -620,5 +620,68 @@ window.__imported__["framer101_inbox/layers.json.js"] = [
       "height" : 658
     },
     "name" : "options"
+  },
+  {
+    "maskFrame" : null,
+    "id" : "81EF06DF-C6DE-4FF8-9CD2-5B8EDF20E099",
+    "visible" : true,
+    "children" : [
+
+    ],
+    "image" : {
+      "path" : "images\/Layer-reminder-81EF06DF-C6DE-4FF8-9CD2-5B8EDF20E099.png",
+      "frame" : {
+        "y" : 2,
+        "x" : 0,
+        "width" : 750,
+        "height" : 1334
+      }
+    },
+    "imageType" : "png",
+    "kind" : "group",
+    "metadata" : {
+      "opacity" : 1
+    },
+    "layerFrame" : {
+      "y" : 2,
+      "x" : 0,
+      "width" : 750,
+      "height" : 1334
+    },
+    "name" : "reminder"
+  },
+  {
+    "maskFrame" : {
+      "y" : 904,
+      "x" : 0,
+      "width" : 750,
+      "height" : 432
+    },
+    "id" : "D2625C03-1395-4602-B1BF-147DE4B3D5CE",
+    "visible" : true,
+    "children" : [
+
+    ],
+    "image" : {
+      "path" : "images\/Layer-keyboard-D2625C03-1395-4602-B1BF-147DE4B3D5CE.png",
+      "frame" : {
+        "y" : 904,
+        "x" : 0,
+        "width" : 750,
+        "height" : 432
+      }
+    },
+    "imageType" : "png",
+    "kind" : "group",
+    "metadata" : {
+      "opacity" : 1
+    },
+    "layerFrame" : {
+      "y" : 904,
+      "x" : 0,
+      "width" : 750,
+      "height" : 432
+    },
+    "name" : "keyboard"
   }
 ]
