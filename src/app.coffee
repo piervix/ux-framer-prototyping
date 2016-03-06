@@ -13,6 +13,8 @@ Framer.Defaults.Animation =
 circle = new Layer
   x: WIDTH / 2
   y: HEIGHT / 2
+  width: 277
+  height: 277
   image: 'images/circle.png'
 
 circle.on Events.Click, ->
