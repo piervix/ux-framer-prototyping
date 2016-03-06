@@ -51,7 +51,7 @@ gulp.task('copy', function () {
     .pipe(gulp.dest('build/images'));
   gulp.src('src/*.css')
     .pipe(gulp.dest('build'));
-  gulp.src('src/**/imported/*')
+  gulp.src('src/**/imported/**/*')
     .pipe(gulp.dest('build'));
 });
 
