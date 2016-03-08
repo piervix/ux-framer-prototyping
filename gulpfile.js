@@ -28,7 +28,7 @@ gulp.task('clean', function () {
 
 gulp.task('watch', function () {
   gulp.watch(['./src/*.coffee', './src/**/*.coffee'], ['webpack']);
-  // gulp.watch('./src/*.sketch', ['copy']);
+  gulp.watch('./src/**/imported/**/*.json', ['copy-imported', browserSync.reload]);
 
   browserSync({
     server: {
@@ -51,6 +51,13 @@ gulp.task('copy', function () {
     .pipe(gulp.dest('build/images'));
   gulp.src('src/*.css')
     .pipe(gulp.dest('build'));
+  gulp.src('src/**/imported/**/*')
+    .pipe(gulp.dest('build'));
+});
+
+gulp.task('copy-imported', function () {
+  gulp.src('./build/imported', { read: false })
+    .pipe(clean());
   gulp.src('src/**/imported/**/*')
     .pipe(gulp.dest('build'));
 });
