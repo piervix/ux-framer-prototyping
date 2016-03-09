@@ -34,3 +34,10 @@ node_modules/
 # Ignore build folder #
 #######################
 build/
+
+# Ignore imported Sketch files and #
+# folders not useful for the build #
+####################################
+src/*/framer/
+src/*/images/
+src/*/*.*/
