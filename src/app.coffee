@@ -1,127 +1,99 @@
+# setup device for presentation
 device = new Framer.DeviceView();
 
 device.setupContext();
 device.deviceType = "iphone-6-silver-hand";
 device.contentScale = 1;
 
-# Variables
-listWidth = 420
-listHeight = 200
-yDistance = listHeight + 8
+deviceHeight = device.screen.height
 
-bg = new BackgroundLayer backgroundColor: "#eee"
-canvas = new Layer width:listWidth, height:1334, backgroundColor: "transparent", clip:false
-canvas.center()
+print deviceHeight
 
-window.onresize = ->
-  canvas.center()
+inbox = Framer.Importer.load("framer101_inbox.framer/imported/framer101_inbox")
 
-# Container for our Array
-Layers = []
-# Retreive the y position of a layer by reading its index
-getFrameByIndex = (index) ->
-  return { y: index * yDistance, height:listHeight }
-# Retreive the index of a layer by reading its y position
-getIndexByFrame = (frame) ->
-  index = parseInt((frame.y + (frame.height / 2)) / yDistance)
-# Retreive the layer by reading an index
-layerAtIndex = (index) ->
-  for layer in Layers
-    if layer.listIndex is index
-      return layer
+# variables
+initialFaceScale = 0.5
+nameOffsetY = 10
 
-# Create list items
-for i in [0..3]
-  layer = new Layer width:listWidth, height:listHeight, y:i*yDistance, clip:false,
-  borderRadius: 4, superLayer:canvas
+# array
+faces = []
+names = []
 
-  # Assign indeces
-  layer.listIndex = i
+# basic setup (hide some layers)
+inbox.options.opacity = 0
+for i in [0...5]
+	faces.push inbox["face#{i+1}"]
+for i in [0...6]
+	names.push inbox["name#{i+1}"]
+for face in faces
+	face.scale = initialFaceScale
+for name in names
+	name.y += nameOffsetY
+inbox.overlay.opacity = 0
+inbox.iconWrite.opacity = 0
+inbox.iconWrite.rotation = -90
+inbox.reminder.y = deviceHeight
+inbox.keyboard.y = deviceHeight
 
-  # Make draggable
-  layer.draggable.enabled = true
-  layer.draggable.speedX = 0
-  layer.draggable.speedY = 1
+# define states
+inbox.overlay.states.add
+	on: { opacity: 1 }
+inbox.overlay.states.animationOptions = curve: "spring(300, 30, 0)"
 
-  # Style layers
-  layer.backgroundColor = "rgba(255,255,255,1)"
-  layer.html = layer.listIndex + 1
-  layer.style.color = "#999"
-  layer.style.lineHeight = listHeight + 6 + "px"
-  layer.style.paddingLeft = "32px"
-  layer.style.fontSize = "24px"
-  layer.style.fontWeight = "400"
-  layer.shadowY = 1
-  layer.shadowBlur = 2
-  layer.style.boxShadow = "0 1px 3px rgba(0,0,0,0.2)"
+inbox.options.states.add
+	on: { opacity: 1 }
+inbox.options.states.animationOptions = curve: "spring(500, 30, 0)"
 
-  # Push into array for us to loop over all layers (like in layerAtIndex)
-  Layers.push(layer)
+for face in faces
+	face.states.add
+		on: { scale: 1 }
+	face.states.animationOptions = curve: "spring(500, 30, 0)"
 
-  layer.on Events.DragMove, (event, draggable, layer) ->
-    # Get the index of the layer being dragged
-    currentIndex = getIndexByFrame(layer.frame)
+for name in names
+	name.states.add
+		on: { y: name.y - nameOffsetY }
+	name.states.animationOptions = curve: "spring(500, 30, 0)"
 
-    # When dragged at enough index...
-    if currentIndex != layer.listIndex && currentIndex >= 0 && currentIndex <= 3
+inbox.iconPlus.states.add
+	on: {opacity: 0, rotation: 90 }
+inbox.iconPlus.states.animationOptions = curve: "spring(500, 30, 0)"
 
-      # When the index of the dragged layer equals that of another layer
-      hoveredLayer = layerAtIndex(currentIndex)
-      # Switch indeces of said layers
-      hoveredLayer.listIndex = layer.listIndex
-      layer.listIndex = currentIndex
+inbox.iconWrite.states.add
+	on: { opacity: 1, rotation: 0 }
+inbox.iconWrite.states.animationOptions = curve: "spring(500, 30, 0)"
 
-      # Label layers
-      layer.html = layer.listIndex+1
-      hoveredLayer.html = hoveredLayer.listIndex+1
+inbox.reminder.states.add
+	on: { y: 0 }
+inbox.reminder.states.animationOptions = curve: "spring(300, 30, 0)"
 
-      # Stop previous animation
-      hoveredLayer.animateStop()
-      # Animate to new position
-      hoveredLayer.animate
-        properties: getFrameByIndex(hoveredLayer.listIndex)
-        curve: "spring(300,40,0)"
+inbox.keyboard.states.add
+	on: { y: deviceHeight - inbox.keyboard.height }
+inbox.keyboard.states.animationOptions = curve: "spring(300, 30, 0)"
 
-  # On DragStart
-  layer.on Events.DragStart, (event, draggable, layer) ->
-    currentIndex = getIndexByFrame(layer)
-    layer.bringToFront()
-    layer.shadowColor = "rgba(0,0,0,0.2)"
+# functions
+stateChange = (state) ->
+	inbox.overlay.states.switch(state)
+	inbox.options.states.switch(state)
+	for face in faces
+		face.states.switch(state)
+	for name in names
+		name.states.switch(state)
+	inbox.iconPlus.states.switch(state)
+	inbox.iconWrite.states.switch(state)
 
-    layer.animate
-      properties:
-        shadowY: 16
-        shadowBlur: 32
-      curve: "ease"
-      time: 0.4
+# events
+inbox.fab.on Events.Click, ->
+	stateChange("on")
 
-    layer.animate
-      properties:
-        scale: 1.1
-      curve: "spring(600,50,0)"
+inbox.overlay.on Events.Click, ->
+	stateChange("default")
 
-  # On DragEnd
-  layer.on Events.DragEnd, (event, draggable, layer) ->
-    layer.animateStop()
-    layer.animate
-      properties:
-        scale: 1
-      curve: "spring(300,50,0)"
+inbox.option4.on Events.Click, ->
+	inbox.reminder.states.switch("on")
+	Utils.delay 0.3, ->
+		inbox.keyboard.states.switch("on")
+	stateChange("default")
 
-    # Reset index when dragging too far out of array
-    currentIndex = getIndexByFrame(layer.frame)
-    if currentIndex < 0
-      currentIndex = 0
-    if currentIndex > 3
-      currentIndex = 3
-
-    layer.animate
-      properties:
-        shadowY: 1
-        shadowBlur: 2
-        y: currentIndex * yDistance
-      curve: "spring(300,40,0)"
-
-    # Reset index, delayed to prevent shadow cut-off
-    Utils.delay 0.4, ->
-      layer.shadowColor = "rgba(0,0,0,0.2)"
+inbox.reminder.on Events.Click, ->
+	inbox.reminder.states.switch("default")
+	inbox.keyboard.states.switch("default")
