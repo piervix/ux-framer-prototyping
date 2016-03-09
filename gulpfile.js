@@ -47,7 +47,7 @@ gulp.task('clean', function () {
 
 gulp.task('watch', function () {
   gulp.watch([paths.appIndex, paths.appModules], ['webpack']);
-  gulp.watch(paths.importedFromSketch, ['copy-imported', browserSync.reload]);
+  gulp.watch(paths.importedFromSketch, ['copy-imported']);
 
   browserSync({
     server: {
@@ -81,4 +81,4 @@ gulp.task('copy-imported', function () {
 });
 
 gulp.task('build', ['copy', 'webpack']);
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build', 'watch']. browserSync.reload);
