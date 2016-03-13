@@ -1,10 +1,10 @@
 {
-  "name": "sketch-framer-prototyping",
+  "name": "ux-framer-prototyping",
   "version": "0.0.1",
-  "description": "",
-  "devDependencies": {
-  },
+  "description": "A tool for rapid prototyping with Sketch and Framer.js",
   "author": "Piervincenzo Madeo",
+  "license": "MIT",
+  "repository": "https://piervix@bitbucket.org/piervix/ux-framer-prototyping.git",
   "dependencies": {
     "browser-sync": "^1.8.0",
     "coffee-loader": "^0.7.2",
@@ -15,8 +15,9 @@
     "gulp-sketch": "0.0.6",
     "gulp-util": "^3.0.1",
     "gulp-watch": "^3.0.0",
-    "webpack": "^1.12.14",
-    "harp": "^0.20.1"
+    "harp": "^0.20.1",
+    "html-webpack-plugin": "^2.10.0",
+    "webpack": "^1.12.14"
   },
   "scripts": {
     "postinstall": "./postinstall.sh"
