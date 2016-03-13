@@ -81,4 +81,4 @@ gulp.task('copy-imported', function () {
 });
 
 gulp.task('build', ['copy', 'webpack']);
-gulp.task('default', ['build', 'watch']. browserSync.reload);
+gulp.task('default', ['build', 'watch'], browserSync.reload);
