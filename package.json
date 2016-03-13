@@ -17,6 +17,6 @@
   "author": "Piervincenzo Madeo",
   "dependencies": {},
   "scripts": {
-    "postinstall": "cd node_modules/framerjs && npm install && make build"
+    "postinstall": "./postinstall.sh"
   }
 }
