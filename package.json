@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": "https://piervix@bitbucket.org/piervix/ux-framer-prototyping.git",
   "dependencies": {
-    "browser-sync": "^1.8.0",
+    "browser-sync": "^1.9.2",
     "coffee-loader": "^0.7.2",
     "framerjs": "https://github.com/koenbok/Framer.git",
     "gulp": "^3.8.10",

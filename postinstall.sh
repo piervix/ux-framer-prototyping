@@ -1,5 +1,5 @@
 cd ./node_modules/framerjs
-npm install --dev
+npm install --only=dev
 mkdir -p build
 gulp build-release
 cd ../..
