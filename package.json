@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "devDependencies": {
+  },
+  "author": "Piervincenzo Madeo",
+  "dependencies": {
     "browser-sync": "^1.8.0",
     "coffee-loader": "^0.7.2",
     "framerjs": "https://github.com/koenbok/Framer.git",
@@ -12,10 +15,9 @@
     "gulp-sketch": "0.0.6",
     "gulp-util": "^3.0.1",
     "gulp-watch": "^3.0.0",
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "harp": "^0.20.1"
   },
-  "author": "Piervincenzo Madeo",
-  "dependencies": {},
   "scripts": {
     "postinstall": "./postinstall.sh"
   }
