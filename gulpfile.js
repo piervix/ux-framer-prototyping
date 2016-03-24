@@ -5,7 +5,6 @@ var coffee = require('gulp-coffee');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 var sketch = require('gulp-sketch');
-var debug = require('gulp-debug');
 var del = require('del');
 var webpack = require('webpack');
 var mergeStream = require('merge-stream');
