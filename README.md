@@ -1,22 +1,22 @@
 ### What's this
 
-Sketcher is a 'work in progress' idea that allow you to create a Framer prototype starting from your Sketch design.
-You can design with Sketch and add animations and interactions with Framer and it's all automated using Webpack, Gulp and BrowserSync.
+Sketcher is a 'work in progress' idea that allow you to create a Framer prototype starting from your Sketch. Nothing new, but there is a plus.
+You can design with Sketch, add animations and interactions with Framer and it's all automated using Webpack, Gulp and BrowserSync.
 
 ### Requirements
 
-* Node.js
+* Node.js (tested with 4.4.1 LTS)
 * Gulp
 * Webpack
-* sketch-tool (if you want to use it, there is a gulp task)
+* sketch-tool (if you want to use it, there is a specific gulp task)
 * Sketch.app
 
 ### Installation
 
 1. Install sketch-tool via [brew](http://brew.sh/):
     1.1 Make sure you have Homebrew version `0.9.5` or higher. You can check with `$ brew --version`
-    1.2                               If you don't have [Homebrew Cask](http://caskroom.io/), run `brew tap caskroom/cask`
-    1.3 Install sketch-tool with `brew cask install sketch-tool`
+    1.2 If you don't have [Homebrew Cask](http://caskroom.io/), run `$ brew tap caskroom/cask`
+    1.3 Install sketch-tool with `$ brew cask install sketch-tool`
 
 2. Download and install [Framer Generator](http://framerjs.com/assets/static/downloads/Framer.zip)
 
