@@ -9,7 +9,7 @@ deviceHeight = device.screen.height
 
 print deviceHeight
 
-inbox = Framer.Importer.load("framer101_inbox.framer/imported/framer101_inbox")
+inbox = Framer.Importer.load("app.framer/imported/app")
 
 # variables
 initialFaceScale = 0.5
