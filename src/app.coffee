@@ -1,3 +1,9 @@
+{ InputField } = require 'InputField'
+
+onInputBlur   = (value, inputName) -> logText "✴️", inputName, "BLUR",   value
+onInputFocus  = (value, inputName) -> logText "✳️", inputName, "FOCUS",  value
+onInputChange = (value, inputName) -> logText "🔄", inputName, "CHANGE", value
+
 # setup device for presentation
 device = new Framer.DeviceView();
 
@@ -18,6 +24,22 @@ nameOffsetY = 10
 # array
 faces = []
 names = []
+
+nameInput = new InputField
+		name: "nameInput"
+		type: "text"
+		width:  Screen.width
+		height: 132
+		color: "DarkCyan"
+		backgroundColor: "#f5f5f5"
+		fontSize: 48
+		indent:   48
+		placeHolder: "Enter Your Full Name"
+		placeHolderFocus: "First Last"
+		autoCapitalize: true
+		onFocusFunction: onInputFocus
+		onInputFunction: onInputChange
+		onBlurFunction:  onInputBlur
 
 # basic setup (hide some layers)
 inbox.options.opacity = 0
