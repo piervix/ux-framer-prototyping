@@ -16,19 +16,19 @@ var webpackCfg = require('./webpack.config.js');
 
 var paths = {
   framerModuleBuild: path.join(__dirname, 'node_modules/framerjs/build/*'),
+  src: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'build'),
   buildFramer: path.join(__dirname, 'build/framer'),
   buildFolders: path.join(__dirname, 'build/**/*.*'),
   buildImages: path.join(__dirname, 'build/images'),
-  src: path.join(__dirname, 'src'),
   appIndex: path.join(__dirname, 'src/app.coffee'),
   appHTML: path.join(__dirname, 'src/index.html'),
+  appImages: path.join(__dirname, 'src/images/**/*.{png, jpg, svg}'),
   appModules: path.join(__dirname, 'src/**/*.coffee'),
+  appCSS: path.join(__dirname, 'src/style.css'),
   importedFromSketchFold: path.join(__dirname, 'src/**/imported/**/**/*'),
   importedFromSketchJson: path.join(__dirname, 'src/**/imported/**/**/*.json'),
   sketchSlices: path.join(__dirname, 'src/*.slices.sketch'),
-  appImages: path.join(__dirname, 'src/images/**/*.{png, jpg, svg}'),
-  appCSS: path.join(__dirname, 'src/style.css'),
 };
 
 var sketchSlices = argv.slices || false;

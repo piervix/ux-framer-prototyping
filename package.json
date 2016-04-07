@@ -22,6 +22,7 @@
     "yargs": "^4.3.2"
   },
   "scripts": {
-    "postinstall": "./postinstall.sh"
+    "postinstall": "./postinstall.sh",
+    "start": "gulp"
   }
 }
