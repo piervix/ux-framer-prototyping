@@ -90,7 +90,7 @@ gulp.task('sketch:slices', ['copy:static', 'copy:framerjs'], function () {
 
 gulp.task('watch:serve', function () {
   gulp.watch([paths.appIndex, paths.appModules], ['webpack']);
-  gulp.watch(sketchWatchPath, [copyTask]);
+  gulp.watch([sketchWatchPath, paths.appImages], [copyTask]);
 
   browserSync({
     server: {
