@@ -1,4 +1,4 @@
-{ InputField } = require 'InputField'
+{ InputField } = require 'inputField'
 
 # setup device for presentation
 device = new Framer.DeviceView();
