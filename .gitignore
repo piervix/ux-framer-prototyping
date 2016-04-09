@@ -38,7 +38,8 @@ build/
 # Ignore imported Sketch files and #
 # folders not useful for the build #
 ####################################
-src/app.framer/
+src/app.framer/*
+!src/app.framer/imported
 src/*/framer/
 src/*/images/
 src/*/*.*/
