@@ -29,24 +29,43 @@ You can work in your Sketch file, add interactions in your CoffeeScript main app
 ### Usage
 
 1. Install gulp-cli `$ npm install gulp-cli -g`
-2. Run `$ gulp`
+2. Run `$ gulp` or `$ npm start`
 3. Work on and save either `src/app.coffee` or `src/assets.sketch`
 4. Import with framer generator or use `$ gulp:sketch` to use sketch-tool
 5. You can create modules in the `src/modules` folder and `src/modules` them in your `app.coffee`
+
+### Gulp tasks
+#### Clean
+
+Run `$ gulp clean` to delete the entire build folder.
+#### Watch
+
+Run the default `$ gulp` task to watch our project folders, launch the server and enjoy live reload.
+
+### Build
+Run `$ gulp build` to build our project and distribute.
+
+### Slices
+Run `$ gulp --slices` to watch using **sketch-tool**.
 
 ### Heroku deployment
 
 You need an active [Heroku account](https://heroku.com), then you can install heroku-toolbelt.
 
-`$ brew install heroku-toolbelt`
-`$ heroku login`
-`$ cd *your-app-folder*`
+```
+$ brew install heroku-toolbelt
+$ heroku login
+$ cd *your-app-folder*
+```
 
 Create the app and start a Git repository.
-`$ git init`
-`$ git add .`
-`$ git commit -am "starting!"`
-`$ heroku create *app-name*`
-`$ git push heroku master`
+
+```
+$ git init
+$ git add .
+$ git commit -am "starting!"
+$ heroku create *app-name*
+$ git push heroku master
+```
 
 We serve static files using [Harp](http://harpjs.com/), we use a super simple configuration but if you want to learn more, just take a look at the [documentation](http://harpjs.com/docs/). You can modify the sample `_harp.json`.
