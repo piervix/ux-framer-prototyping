@@ -1,99 +1,115 @@
+{ InputField } = require 'InputField'
+
 # setup device for presentation
 device = new Framer.DeviceView();
 
-device.setupContext();
-device.deviceType = "iphone-6-silver-hand";
-device.contentScale = 1;
+device.setupContext()
+device.deviceType = "google-nexus-6p"
+device.contentScale = 1
 
 deviceHeight = device.screen.height
+deviceWidth = device.screen.width
 
-print deviceHeight
+app = Framer.Importer.load("app.framer/imported/app@1x")
 
-inbox = Framer.Importer.load("framer101_inbox.framer/imported/framer101_inbox")
+# variables to hold a scale value we’ll use later
+initialScale = 0.2
 
-# variables
-initialFaceScale = 0.5
-nameOffsetY = 10
+# array of our actions
+actionButtons = []
 
-# array
-faces = []
-names = []
+# the input element from module
+taskInput = new InputField
+  name: "task"
+  type: "text-area"
+  width:  deviceWidth
+  height: deviceHeight - app.keyboard.height
+  color: "DarkCyan"
+  backgroundColor: "#f5f5f5"
+  fontSize: 200
+  indent: 120
+  placeHolder: "Add task"
+  placeHolderFocus: ""
+  autoCapitalize: true
 
-# basic setup (hide some layers)
-inbox.options.opacity = 0
-for i in [0...5]
-	faces.push inbox["face#{i+1}"]
-for i in [0...6]
-	names.push inbox["name#{i+1}"]
-for face in faces
-	face.scale = initialFaceScale
-for name in names
-	name.y += nameOffsetY
-inbox.overlay.opacity = 0
-inbox.iconWrite.opacity = 0
-inbox.iconWrite.rotation = -90
-inbox.reminder.y = deviceHeight
-inbox.keyboard.y = deviceHeight
+# hide some layers for the initial state
+app.actions.opacity = 0
+app.overlay.opacity = 0
+app.iconWrite.opacity = 0
+app.keyboard.opacity = 0
+app.keyboard.y = app.keyboard.height + deviceHeight
+taskInput.opacity = 0
+
+# set initial rotation for the icon
+app.iconWrite.rotation = -180
+
+# create an array of action layers (Add, Reminder, Task)
+for i in [0...3]
+ actionButtons.push app["action#{i+1}"]
+
+# Add initial scale value to action buttons
+for action in actionButtons
+ action.scale = initialScale
 
 # define states
-inbox.overlay.states.add
-	on: { opacity: 1 }
-inbox.overlay.states.animationOptions = curve: "spring(300, 30, 0)"
+app.overlay.states.add
+  openActions: { opacity: 1 }
+app.overlay.states.animationOptions = curve: "spring(400, 20, 0)"
 
-inbox.options.states.add
-	on: { opacity: 1 }
-inbox.options.states.animationOptions = curve: "spring(500, 30, 0)"
+app.actions.states.add
+  openActions: { opacity: 1 }
+app.actions.states.animationOptions = curve: "spring(400, 20, 0)"
 
-for face in faces
-	face.states.add
-		on: { scale: 1 }
-	face.states.animationOptions = curve: "spring(500, 30, 0)"
+app.keyboard.states.add
+  openInput: { opacity: 1; y: deviceHeight - app.keyboard.height}
+app.keyboard.states.animationOptions = { curve: "linear", time: 0.1 }
 
-for name in names
-	name.states.add
-		on: { y: name.y - nameOffsetY }
-	name.states.animationOptions = curve: "spring(500, 30, 0)"
+for action in actionButtons
+  action.states.add
+    openActions: { scale: 1 }
+  action.states.animationOptions = curve: "spring(500, 30, 0)"
 
-inbox.iconPlus.states.add
-	on: {opacity: 0, rotation: 90 }
-inbox.iconPlus.states.animationOptions = curve: "spring(500, 30, 0)"
+app.iconPlus.states.add
+  openActions: {
+    opacity: 0,
+    rotation: 90
+  }
+app.iconPlus.states.animationOptions = curve: "spring(500, 30, 0)"
 
-inbox.iconWrite.states.add
-	on: { opacity: 1, rotation: 0 }
-inbox.iconWrite.states.animationOptions = curve: "spring(500, 30, 0)"
+app.iconWrite.states.add
+  openActions: {
+    opacity: 1,
+    rotation: 0
+  }
+app.iconWrite.states.animationOptions = curve: "spring(500, 30, 0)"
 
-inbox.reminder.states.add
-	on: { y: 0 }
-inbox.reminder.states.animationOptions = curve: "spring(300, 30, 0)"
-
-inbox.keyboard.states.add
-	on: { y: deviceHeight - inbox.keyboard.height }
-inbox.keyboard.states.animationOptions = curve: "spring(300, 30, 0)"
+taskInput.states.add
+  openInput: { opacity: 1 }
+taskInput.states.animationOptions = { curve: "spring(500, 30, 0)", time: 0.1 }
 
 # functions
-stateChange = (state) ->
-	inbox.overlay.states.switch(state)
-	inbox.options.states.switch(state)
-	for face in faces
-		face.states.switch(state)
-	for name in names
-		name.states.switch(state)
-	inbox.iconPlus.states.switch(state)
-	inbox.iconWrite.states.switch(state)
+switchOptions = (state) ->
+  app.overlay.states.switch(state)
+  app.actions.states.switch(state)
+  for action in actionButtons
+    action.states.switch(state)
+  app.iconPlus.states.switch(state)
+  app.iconWrite.states.switch(state)
+
+switchInput = (state) ->
+  taskInput.states.switch(state)
+  app.keyboard.states.switch(state)
 
 # events
-inbox.fab.on Events.Click, ->
-	stateChange("on")
+app.floatingButton.on Events.Click, ->
+  switchOptions("openActions")
 
-inbox.overlay.on Events.Click, ->
-	stateChange("default")
+app.overlay.on Events.Click, ->
+  switchOptions("default")
 
-inbox.option4.on Events.Click, ->
-	inbox.reminder.states.switch("on")
-	Utils.delay 0.3, ->
-		inbox.keyboard.states.switch("on")
-	stateChange("default")
+app.action2.on Events.Click, ->
+  switchInput("openInput")
 
-inbox.reminder.on Events.Click, ->
-	inbox.reminder.states.switch("default")
-	inbox.keyboard.states.switch("default")
+app.keyboard.on Events.Click, ->
+  switchInput("default")
+  switchOptions("default")
