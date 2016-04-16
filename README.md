@@ -5,6 +5,10 @@ You can design with Sketch, add animations and interactions with Framer and it's
 
 You can work in your Sketch file, add interactions in your CoffeeScript main app file, save and automagically have the animated prototype updated with the new code and images inside the build folder.
 
+[Try Demo](https://framer-ux.herokuapp.com/)
+
+[Read blog post](https://blog.prototypr.io/automate-your-ux-design-workflow-with-framer-js-gulp-and-sketch-cc2e8484e4b7#.yw2i6ophx)
+
 ### Requirements
 
 * Node.js (tested with 4.4.1 LTS)
@@ -42,10 +46,10 @@ Run `$ gulp clean` to delete the entire build folder.
 
 Run the default `$ gulp` task to watch our project folders, launch the server and enjoy live reload.
 
-### Build
+#### Build
 Run `$ gulp build` to build our project and distribute.
 
-### Slices
+#### Slices
 Run `$ gulp --slices` to watch using **sketch-tool**.
 
 ### Heroku deployment

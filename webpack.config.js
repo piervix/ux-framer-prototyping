@@ -1,6 +1,7 @@
 'use strict';
 
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname + '/src/',
@@ -11,19 +12,25 @@ module.exports = {
         {
           test: /\.coffee$/,
           loader: 'coffee-loader',
-          exclude: /(node_modules|bower_components)/,
+	  exclude: /(node_modules)/,
         },
         {
           test: /\.(coffee\.md|litcoffee)$/,
           loader: 'coffee-loader?literate',
-          exclude: /(node_modules|bower_components)/,
+	  exclude: /(node_module)/,
         },
     ],
   },
   output: {
     path: __dirname + '/build',
-    filename: 'app.js',
+    filename: 'app.[hash].js',
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'UX Framer Prototype',
+      template: __dirname + '/src/index.html',
+    }),
+  ],
   resolve: {
     root:  [__dirname + '/src/'],
     modulesDirectories: [__dirname + '/src/modules/'],

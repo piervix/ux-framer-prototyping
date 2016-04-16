@@ -24,6 +24,7 @@ taskInput = new InputField
   type: "text-area"
   width:  deviceWidth
   height: deviceHeight - app.keyboard.height
+  index: 0
   color: "DarkCyan"
   backgroundColor: "#f5f5f5"
   fontSize: 200
@@ -85,14 +86,15 @@ app.iconWrite.states.animationOptions = curve: "spring(500, 30, 0)"
 
 taskInput.states.add
   openInput: { opacity: 1 }
-taskInput.states.animationOptions = { curve: "spring(500, 30, 0)", time: 0.1 }
+taskInput.states.animationOptions = curve: "spring(400, 20, 0)"
 
 # functions
 switchOptions = (state) ->
-  app.overlay.states.switch(state)
-  app.actions.states.switch(state)
   for action in actionButtons
     action.states.switch(state)
+
+  app.overlay.states.switch(state)
+  app.actions.states.switch(state)
   app.iconPlus.states.switch(state)
   app.iconWrite.states.switch(state)
 
@@ -108,6 +110,7 @@ app.overlay.on Events.Click, ->
   switchOptions("default")
 
 app.action2.on Events.Click, ->
+  taskInput.index = 1
   switchInput("openInput")
 
 app.keyboard.on Events.Click, ->
