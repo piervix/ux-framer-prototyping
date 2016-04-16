@@ -114,5 +114,6 @@ app.action2.on Events.Click, ->
   switchInput("openInput")
 
 app.keyboard.on Events.Click, ->
+  taskInput.index = 0
   switchInput("default")
   switchOptions("default")
