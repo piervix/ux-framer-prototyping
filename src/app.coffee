@@ -86,7 +86,7 @@ app.iconWrite.states.animationOptions = curve: "spring(500, 30, 0)"
 
 taskInput.states.add
   openInput: { opacity: 1 }
-taskInput.states.animationOptions = { curve: "spring(500, 30, 0)", time: 0.1 }
+taskInput.states.animationOptions = curve: "spring(400, 20, 0)"
 
 # functions
 switchOptions = (state) ->
