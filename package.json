@@ -1,12 +1,12 @@
 {
   "name": "ux-framer-prototyping",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "A tool for rapid prototyping with Sketch and Framer.js",
   "author": "Piervincenzo Madeo",
   "license": "MIT",
   "repository": "https://piervix@bitbucket.org/piervix/ux-framer-prototyping.git",
   "dependencies": {
-    "browser-sync": "^1.9.2",
+    "browser-sync": "^2.10.0",
     "coffee-loader": "^0.7.2",
     "del": "^2.2.0",
     "framerjs": "https://github.com/koenbok/Framer.git",
@@ -14,7 +14,6 @@
     "gulp-coffee": "^2.2.0",
     "gulp-sketch": "0.0.6",
     "gulp-util": "^3.0.1",
-    "gulp-watch": "^3.0.0",
     "harp": "^0.20.1",
     "html-webpack-plugin": "^2.10.0",
     "merge-stream": "^1.0.0",
@@ -23,6 +22,9 @@
   },
   "scripts": {
     "postinstall": "./postinstall.sh",
-    "start": "gulp"
+    "start": "gulp",
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "serve": "harp server ./build"
   }
 }
