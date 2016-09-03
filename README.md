@@ -26,13 +26,13 @@ You can work in your Sketch file, add interactions in your CoffeeScript main app
     2. If you don't have [Homebrew Cask](http://caskroom.io/), run `$ brew tap caskroom/cask`
     3. Install sketch-tool with `$ brew cask install sketch-tool`
 
-3. Download and install [Framer Generator](http://framerjs.com/assets/static/downloads/Framer.zip)
+3. Download and install latest version of [Framer Generator](http://builds.framerjs.com/)
 
 4. Run `$ npm install`. At the moment it takes a lot to install and build Framer JS via Github, there should be a better solution (I had some problems with npm version of the library)
 
 ### Usage
 
-1. Install gulp-cli `$ npm install gulp-cli -g`
+1. Install gulp-cli `$ npm install gulp-cli -g` (but you can always use local version via npm scripts)
 2. Run `$ gulp` or `$ npm start`
 3. Work on and save either `src/app.coffee` or `src/assets.sketch`
 4. Import with framer generator or use `$ gulp:sketch` to use sketch-tool
