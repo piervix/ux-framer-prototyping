@@ -1,3 +1,4 @@
+### Not mantained - Read only version
 ### What's this
 
 A 'work in progress' idea that allow you to create a Framer prototype starting from your Sketch. Nothing new, but there is a plus.
